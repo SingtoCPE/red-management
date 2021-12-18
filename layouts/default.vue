@@ -46,7 +46,7 @@
     </v-navigation-drawer>
     <v-app-bar fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title v-text="title" />
+      <v-toolbar-title v-text="company.companyName" />
       <v-icon class="ml-1">mdi-account-cowboy-hat</v-icon>
       <v-spacer />
       <v-menu
@@ -101,13 +101,13 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {
-      clipped: false,
-      drawer: false,
+      drawer: true,
       fixed: false,
-      title: "SBS MANAGEMENT",
       user: {
         initials: "AD",
         fullName: "ADMIN",
@@ -126,7 +126,7 @@ export default {
           childrens: [
             {
               title: "ใบขอซื้อ",
-              // to: "/courts/provincial-court",
+              to: "/purchase/order-po",
             },
             {
               title: "ใบสั่งซื้อ",
@@ -141,10 +141,29 @@ export default {
           childrens: [
             {
               title: "ใบเสนอราคา",
-              // to: "/courts/provincial-court",
+              to: "/sales/order-so",
             },
             {
               title: "ใบรับคำสั่งซื้อจากลูกค้า",
+              // to: "/courts/district-court",
+            },
+          ],
+        },
+
+        {
+          icon: "mdi-database",
+          title: "ฐานข้อมูล",
+          childrens: [
+            {
+              title: "พนักงาน",
+              // to: "/courts/provincial-court",
+            },
+            {
+              title: "หน่วยเงิน",
+              // to: "/courts/district-court",
+            },
+            {
+              title: "ภาษี",
               // to: "/courts/district-court",
             },
           ],
@@ -159,13 +178,21 @@ export default {
     };
   },
 
+  computed: {
+    ...mapState({
+      company: (state) => state.company.company,
+    }),
+  },
+
   methods: {
     signOut() {
       this.$router.push("/");
       this.$store.commit("login/setIsLogin", false);
+      this.$store.commit("company/setCompany", {});
     },
     checkStart(index) {
       console.log({ index });
+      console.log(this.company);
     },
   },
 };

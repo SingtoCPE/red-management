@@ -77,7 +77,7 @@
               </v-row>
               <v-divider class="my-4" />
               <v-row>
-                <v-col class="col-12 text-center">ใบขอซื้อทั้งหมด</v-col>
+                <v-col class="col-12 text-center">ใบขอซื้อ</v-col>
               </v-row>
             </v-card>
           </v-col>
@@ -88,7 +88,7 @@
               </v-row>
               <v-divider class="my-4" />
               <v-row>
-                <v-col class="col-12 text-center">ใบสั่งซื้อทั้งหมด</v-col>
+                <v-col class="col-12 text-center">ใบสั่งซื้อ</v-col>
               </v-row>
             </v-card>
           </v-col>
@@ -124,6 +124,9 @@
 
 <script>
 export default {
+  head: () => ({
+    title: "Dashboard -",
+  }),
   data: () => ({
     searchPurchase: "",
     searchSales: "",

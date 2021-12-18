@@ -37,6 +37,9 @@ import { mapState } from "vuex";
 
 export default {
   layout: "empty",
+  head: () => ({
+    title: "เข้าสู่ระบบ -",
+  }),
   data: () => ({
     form: {
       username: "admin",
@@ -46,7 +49,13 @@ export default {
   }),
   methods: {
     submit() {
-      this.$router.push("/dashboard");
+      this.storeToken;
+      this.$router.push("/select-company");
+    },
+    storeToken() {
+      if (process.client) {
+        localStorage.setItem("authToken", 1234);
+      }
     },
   },
 };
